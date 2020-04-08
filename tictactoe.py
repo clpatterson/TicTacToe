@@ -3,10 +3,9 @@ import datetime
 
 # TODO: create game class
 class TicTacToe:
-	# Class Attribute
-	board = list("\n_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n")
 	# Initializer
 	def __init__(self, start, end, move_count, winner):
+		self.board = list("\n_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n")
 		self.start = start
 		self.end = end
 		self.move_count = move_count
@@ -16,7 +15,7 @@ class TicTacToe:
 	def update_board(self,move,player):
 		if self.move_count == 9:
 			return 'The Game is over! There are no more moves to make.'
-		if player is 'player_1':
+		if player == 'player_1':
 			# Use list board and this algorithm to find place on board to change board[move*4-2]
 			self.board[move*4-2] = 'X'
 			self.move_count += 1

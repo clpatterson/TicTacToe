@@ -13,6 +13,7 @@ print("There are two players in Tic-Tac-Toe, player 1 who plays 'X' markers",
 willing_to_play = True
 games = []
 
+# TODO: Validate User Input
 # def validate_player_move():
 # 	# Validation rules
 # 	# must enter a number, must be integer, must be an available move
@@ -30,11 +31,11 @@ def game_turn(move,player):
 	print("{}, please enter your move.".format(player),
 				"(Enter the number for the space on the board",
 				"you wish to occupy.")
-	# TODO: Collect user input and validate
+	# TODO: Validate use input
 	player_move = int(input("Enter move:"))
 
 	game.update_board(player_move,player)
-	if player is 'player_1':
+	if player == 'player_1':
 		move += 1
 		print(move)
 		return move
@@ -43,35 +44,30 @@ def game_turn(move,player):
 		print(move)
 		return move
 
-# # Allow players to play multiple games, if they wish
-# while willing_to_play == True:
-# 	# Determine who will start by flipping
-# 	# TODO: Use numpy to implement coin fair coin flip
-# 	print("Please enter 'flip' now to flip a coin and determine who goes first.")
-move = 1
-games.append(tictactoe.TicTacToe(datetime.datetime.now(),None,0,None))
-game = games[-1]
-# Allow players to make moves until the game is over
-while game.end == None:
-	print(game.show_board())
-	if move == 0:
-		move = game_turn(move,'player_1')
+# Allow players to play multiple games, if they wish
+while willing_to_play == True:
+	# TODO: Use numpy to implement random coin flip
+	print("Please enter 'flip' now to flip a coin and determine who goes first.")
+	move = 1
+	games.append(tictactoe.TicTacToe(datetime.datetime.now(),None,0,None))
+	game = games[-1]
+	# Allow players to make moves until the game is over
+	while game.end == None:
+		print(game.show_board())
+		if move == 0:
+			move = game_turn(move,'player_1')
+		else:
+			move = game_turn(move,'player_2')
+		if game.check_score() is not None:
+			print(game.check_score())
+			game.game_over()
+	# TODO: Validate input
+	play_again = input("Would you like to play again? (yes/no):")
+	if play_again.lower() == 'no':
+		willing_to_play = False
 	else:
-		move = game_turn(move,'player_2')
-	if game.check_score() is not None:
-		print(game.check_score())
-		game.game_over()
-		print(game.end)
+		pass
 
-print(figlet.renderText("Thank You! Goodbye."))
-
-# Ask players to choose who will be 1,2
-# Explain how to make moves & rules
-
-# -- game play --
-# Flip a coin to determine who goes first (x or o)
-# Take player moves sequentially
-# Announce winner
-# Ask if players wish to play again or quit?
-# Repeat for new game
+# Exit out of the program
+print(figlet.renderText("Thank You! Play Again!."))
 
