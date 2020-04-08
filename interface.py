@@ -10,10 +10,8 @@ print("\n Welcome to Terminal Tic-Tac-Toe, a game for the understimulated.\n ")
 print("There are two players in Tic-Tac-Toe, player 1 who plays 'X' markers",
       "and player 2 who plays 'O' markers.")
 
-# TODO: Use numpy to implement coin fair coin flip
-print("Please enter 'flip' now to flip a coin and determine who goes first.")
-first_move = 1
-desire_to_play = True
+willing_to_play = True
+games = []
 
 # def validate_player_move():
 # 	# Validation rules
@@ -45,25 +43,27 @@ def game_turn(move,player):
 		print(move)
 		return move
 
-# Start game
-while desire_to_play is True:
-	print("Let the games begin!")
-	game = tictactoe.TicTacToe(datetime.datetime.now(),None,0,None)
-	while game.end is None:
-		move = first_move
-		for turn in range(9):
-			print(game.show_board())
-			if move is 0:
-				move = game_turn(move,'player_1')
-			else:
-				move = game_turn(move,'player_2')
-			if game.check_score() is not None:
-				print(game.check_score())
-				game.game_over()
-				break
+# # Allow players to play multiple games, if they wish
+# while willing_to_play == True:
+# 	# Determine who will start by flipping
+# 	# TODO: Use numpy to implement coin fair coin flip
+# 	print("Please enter 'flip' now to flip a coin and determine who goes first.")
+move = 1
+games.append(tictactoe.TicTacToe(datetime.datetime.now(),None,0,None))
+game = games[-1]
+# Allow players to make moves until the game is over
+while game.end == None:
+	print(game.show_board())
+	if move == 0:
+		move = game_turn(move,'player_1')
+	else:
+		move = game_turn(move,'player_2')
+	if game.check_score() is not None:
+		print(game.check_score())
+		game.game_over()
+		print(game.end)
 
-
-
+print(figlet.renderText("Thank You! Goodbye."))
 
 # Ask players to choose who will be 1,2
 # Explain how to make moves & rules
