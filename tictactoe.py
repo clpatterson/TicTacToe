@@ -1,7 +1,6 @@
 
 import datetime
 
-# TODO: create game class
 class TicTacToe:
 	# Initializer
 	def __init__(self, start, end, move_count, winner):
@@ -76,33 +75,6 @@ class TicTacToe:
 			self.winner = 'draw'
 			return "The game is a draw! Neither player triumphed!"
 
-
 	def game_over(self):
 		self.end = datetime.datetime.now()
 		return None
-
-# # Test Game
-# game = TicTacToe(datetime.datetime.now(),None,0,None)
-# print(game.show_board())
-# print(game.update_board(1,'player_2'))
-# print(game.show_board())
-# print(game.update_board(3,'player_1'))
-# print(game.show_board())
-# print(game.update_board(5,'player_2'))
-# print(game.show_board())
-# print(game.update_board(7,'player_2'))
-# print(game.show_board())
-# print(game.update_board(6,'player_2'))
-# print(game.show_board())
-# print(game.check_score())
-# print(game.update_board(4,'player_1'))
-# print(game.show_board())
-# print(game.update_board(2,'player_2'))
-# print(game.show_board())
-# print(game.update_board(8,'player_1'))
-# print(game.show_board())
-# print(game.update_board(9,'player_1'))
-# print(game.show_board())
-# print(game.check_score())
-# game.game_over(None)
-# print(game.start,game.end)
