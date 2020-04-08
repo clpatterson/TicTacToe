@@ -14,7 +14,6 @@ print("There are two players in Tic-Tac-Toe, player 1 who plays 'X' markers",
 willing_to_play = True
 games = []
 
-# TODO: Validate User Input
 def get_valid_move():
 	# User must enter an integer 1-9 unoccupied on the board
 	while True:
@@ -47,7 +46,7 @@ def game_turn(move,player):
 while willing_to_play == True:
 	# Randomly determine game order
 	move = random.getrandbits(1)
-	print("A coin has been flipped to randomly determine player order!")
+	print("A coin has been flipped to randomly determine player order.\n")
 	games.append(tictactoe.TicTacToe(datetime.datetime.now(),None,0,None))
 	game = games[-1]
 	# Allow players to make moves until the game is over
