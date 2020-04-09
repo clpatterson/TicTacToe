@@ -2,7 +2,6 @@
 import datetime
 
 class TicTacToe:
-	# Initializer
 	def __init__(self, start, end, move_count, winner):
 		self.board = list("\n_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n")
 		self.start = start
