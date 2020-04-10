@@ -35,11 +35,12 @@ def game_turn(move,player):
 				"(Enter the number for the space on the board",
 				"you wish to occupy.)")
 	player_move = get_valid_move()
-	game.update_board(player_move,player)
-	if player == 'player_1':
+	if player == "player_1":
+		game.update_board(player_move,"X")
 		move += 1
 		return move
 	else:
+		game.update_board(player_move,"O")
 		move -= 1
 		return move
 
@@ -48,7 +49,7 @@ while willing_to_play == True:
 	# Randomly determine game order
 	move = random.getrandbits(1)
 	print("A coin has been flipped to randomly determine player order!")
-	games.append(tictactoe.TicTacToe(datetime.datetime.now(),None,0,None))
+	games.append(tictactoe.TicTacToe())
 	game = games[-1]
 	# Allow players to make moves until the game is over
 	while game.end == None:
@@ -58,8 +59,14 @@ while willing_to_play == True:
 		else:
 			move = game_turn(move,'player_2')
 		if game.check_score() != None:
-			print(game.check_score())
-			game.game_over()
+			if game.check_score() == 'draw':
+				print("No one has triumped! The match is a draw.")
+				print(game.show_board())
+				game.game_over()
+			else:
+				print("The winner is", game.check_score(), "!")
+				print(game.show_board())
+				game.game_over()
 	# TODO: Validate input
 	play_again = input("Would you like to play again? (yes/no):")
 	if play_again.lower() == 'no':

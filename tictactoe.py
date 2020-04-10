@@ -2,78 +2,45 @@
 import datetime
 
 class TicTacToe:
-	# Initializer
-	def __init__(self, start, end, move_count, winner):
+	def __init__(self):
 		self.board = list("\n_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n")
-		self.start = start
-		self.end = end
-		self.move_count = move_count
-		self.winner = winner
+		self.start = datetime.datetime.now()
+		self.end = None
+		self.move_count = 0
+		self.winner = None
 
     # Update the board with the latest move
-	def update_board(self,move,player):
-		if self.move_count == 9:
-			return 'The Game is over! There are no more moves to make.'
-		if player == 'player_1':
-			# Use list board and this algorithm to find place on board to change board[move*4-2]
-			self.board[move*4-2] = 'X'
-			self.move_count += 1
-		else:
-			self.board[move*4-2] = 'O'
-			self.move_count += 1
+	def update_board(self,move,marker):
+		self.board[move*4-2] = marker
+		self.move_count += 1
 		return None
 
 	def show_board(self):
 		return "".join(self.board)
 
-	def get_positions(self):
-		x_positions =[]
-		o_positions =[]
-		for position in range(len(self.board)):
-			if self.board[position] == 'X':
-				x_positions.append(position)
-			elif self.board[position] == 'O':
-				o_positions.append(position)
-			else:
-				pass
-		return x_positions, o_positions
-
 	def check_score(self):
-		positions = self.get_positions()
-		x_positions = positions[0]
-		o_positions = positions[1]
 		winning_position_combos = [[2, 18, 34], 
-		                   [10, 18, 26],
-		                   [2, 6, 10],
-		                   [14, 18, 22],
-		                   [26, 30, 34],
-		                   [2, 14, 26],
-		                   [6, 18, 30],
-		                   [10, 22, 34]]
-		for combo in winning_position_combos:
-			x_position_count = 0
-			o_position_count = 0
-			for position in combo:
-				try:
-					x_positions.index(position)
-					x_position_count += 1
-				except:
-					pass
-				try:
-					o_positions.index(position)
-					o_position_count += 1
-				except:
-					pass
-			if x_position_count == 3:
+		                           [10, 18, 26],
+		                           [2, 6, 10],
+		                           [14, 18, 22],
+		                           [26, 30, 34],
+		                           [2, 14, 26],
+		                           [6, 18, 30],
+		                           [10, 22, 34]]
+		for c in winning_position_combos:
+			if all([self.board[idx] == 'X' for idx in c]):
 				self.winner = "player_1"
-				return "Player 1 wins!"
-			elif o_position_count == 3:
+				return self.winner
+			elif all([self.board[idx] == 'O' for idx in c]):
 				self.winner = "player_2"
-				return "Player 2 wins!"
-		# Declare a draw after 9 moves and no win
-		if self.move_count == 9:
-			self.winner = 'draw'
-			return "The game is a draw! Neither player triumphed!"
+				return self.winner
+			else:
+				continue
+		if self.move_count == 9 and self.winner == None:
+			self.winner = "draw"
+			return self.winner
+		else:
+			return None
 
 	def game_over(self):
 		self.end = datetime.datetime.now()
